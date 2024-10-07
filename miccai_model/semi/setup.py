@@ -1,9 +1,9 @@
 from setuptools import setup, find_namespace_packages
 
 setup(name='semi',
-      packages=find_namespace_packages(include=["my_net", "my_net.*"]),
-      version='2.0',
-      description='semi supervise net try.',
+      packages=find_namespace_packages(include=["miccai_model", "miccai_model.*"]),
+      version='1.0',
+      description='miccai_model.',
       url='',
       author='ho',
       author_email='',
