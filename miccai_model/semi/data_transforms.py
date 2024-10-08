@@ -227,7 +227,7 @@ class SampleResizeyx:
             zoom = mt.Zoom(zoom=zoom_factors,keep_size=False)  
             if key == 'label':
                 if(np.max(sample['label'])== 0):
-                    sample['label'] = np.zeros(sample['label'].shape)
+                    sample['label'] = np.zeros((z, ny, nx))
                 else:
                     sample['label'] = zoom(sample['label'].reshape(1,*sample['label'].shape),mode="nearest").squeeze(0).numpy()
             else:
