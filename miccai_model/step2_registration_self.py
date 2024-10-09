@@ -166,31 +166,31 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(out_dir,"mask"))
     body_registration_phase("/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_C-pre_0000.nii.gz","/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_InPhase_0000.nii.gz",
                             "/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_InPhase_0000.nii.gz","") 
-    # mri_pre_paths = [os.path.join(in_dir,f) for f in os.listdir(in_dir) if f.endswith(subs['pre']) ]
-    # mri_v_paths = [str.replace(f,subs["pre"],subs["v"]) for f in mri_pre_paths]
-    # mri_a_paths = [str.replace(f,subs["pre"],subs["a"]) for f in mri_pre_paths]
-    # mri_d_paths = [str.replace(f,subs["pre"],subs["delay"]) for f in mri_pre_paths]
-    # mri_inphase_paths = [str.replace(f,subs["pre"],subs["inphase"]) for f in mri_pre_paths]
-    # mri_outphase_paths = [str.replace(f,subs["pre"],subs["outphase"]) for f in mri_pre_paths]
+    mri_pre_paths = [os.path.join(in_dir,f) for f in os.listdir(in_dir) if f.endswith(subs['pre']) ]
+    mri_v_paths = [str.replace(f,subs["pre"],subs["v"]) for f in mri_pre_paths]
+    mri_a_paths = [str.replace(f,subs["pre"],subs["a"]) for f in mri_pre_paths]
+    mri_d_paths = [str.replace(f,subs["pre"],subs["delay"]) for f in mri_pre_paths]
+    mri_inphase_paths = [str.replace(f,subs["pre"],subs["inphase"]) for f in mri_pre_paths]
+    mri_outphase_paths = [str.replace(f,subs["pre"],subs["outphase"]) for f in mri_pre_paths]
 
-    # mri_ra_paths = [os.path.join(a_dir,f) for f in os.listdir(a_dir) if f.endswith(subs['a']) ]
-    # mri_t2wi_paths = [str.replace(str.replace(f,a_dir,in_dir),subs["a"],subs["t2wi"]) for f in mri_ra_paths]
-    # mri_dwi_paths = [str.replace(str.replace(f,a_dir,in_dir),subs["a"],subs["dwi"]) for f in mri_ra_paths]
+    mri_ra_paths = [os.path.join(a_dir,f) for f in os.listdir(a_dir) if f.endswith(subs['a']) ]
+    mri_t2wi_paths = [str.replace(str.replace(f,a_dir,in_dir),subs["a"],subs["t2wi"]) for f in mri_ra_paths]
+    mri_dwi_paths = [str.replace(str.replace(f,a_dir,in_dir),subs["a"],subs["dwi"]) for f in mri_ra_paths]
 
-    # ptqdm(function = body_registration_a_v, iterable = (mri_pre_paths,mri_a_paths), processes = 5,
-    #     zipped=True,out_dir=out_dir
-    # )  
-    # ptqdm(function = body_registration_a_v, iterable = (mri_pre_paths,mri_v_paths), processes = 5,
-    #     zipped=True,out_dir=out_dir
-    # )  
-    # ptqdm(function = body_registration_delay, iterable = (mri_pre_paths,mri_d_paths), processes = 5,
-    # zipped=True,out_dir=out_dir
-    # )  
-    # ptqdm(function = registration_wi2a, iterable = (mri_ra_paths,mri_t2wi_paths), processes = 5,
-    #     zipped=True,out_dir=out_dir
-    # )  
-    # ptqdm(function = body_registration_phase, iterable = (mri_pre_paths,mri_inphase_paths,mri_outphase_paths), processes = 5,
-    #     zipped=True,out_dir=out_dir
-    # )      
+    ptqdm(function = body_registration_a_v, iterable = (mri_pre_paths,mri_a_paths), processes = 5,
+        zipped=True,out_dir=out_dir
+    )  
+    ptqdm(function = body_registration_a_v, iterable = (mri_pre_paths,mri_v_paths), processes = 5,
+        zipped=True,out_dir=out_dir
+    )  
+    ptqdm(function = body_registration_delay, iterable = (mri_pre_paths,mri_d_paths), processes = 5,
+    zipped=True,out_dir=out_dir
+    )  
+    ptqdm(function = registration_wi2a, iterable = (mri_ra_paths,mri_t2wi_paths), processes = 5,
+        zipped=True,out_dir=out_dir
+    )  
+    ptqdm(function = body_registration_phase, iterable = (mri_pre_paths,mri_inphase_paths,mri_outphase_paths), processes = 5,
+        zipped=True,out_dir=out_dir
+    )      
 
 
