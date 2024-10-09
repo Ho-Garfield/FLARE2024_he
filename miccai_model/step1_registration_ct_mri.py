@@ -4,11 +4,21 @@ import os
 from acvl_utils.miscellaneous.ptqdm import ptqdm
 import numpy as np
 from skimage import filters
+tmp_dir = r"./temp1"
 
 img_sub = "_0000.nii.gz"
 lab_sub = ".nii.gz"
-tmp_dir = r"./temp1"
 
+a0_path ="./images_255_select/FLARE22_Tr_0001_0000.nii.gz"
+a0_label_path ="./labels/FLARE22_Tr_0001.nii.gz"
+b0_path = "./Flip_resample/MR745_6_C-pre_0000.nii.gz"
+
+out_dir_mid = ""
+out_dir_final = ""
+
+input_images_dir="./images_255_select"
+input_labels_dir ="./labels"
+input_targets_dir="./Flip_resample"
 
 
 
@@ -136,16 +146,7 @@ def registration_a02b0(a0_path,b0_path,a0_label_path,a_out_dir):
 
 import ants
 
-a0_path ="/DATA_16T/MICCAI/step1/before/images_255/FLARE22_Tr_0001_0000.nii.gz"
-a0_label_path ="/DATA_16T/MICCAI/step1/before/labels/FLARE22_Tr_0001.nii.gz"
-b0_path = "/DATA_16T/MICCAI/Flip_resample/MR745_6_C-pre_0000.nii.gz"
 
-out_dir_mid = "/DATA_16T/MICCAI/step0"
-out_dir_final = "/DATA_16T/MICCAI/step1"
-
-input_images_dir="/DATA_16T/MICCAI/step1/before/select"
-input_labels_dir ="/DATA_16T/MICCAI/step1/before/labels"
-input_targets_dir="/DATA_16T/MICCAI/Flip_resample"
 
 if __name__ == "__main__":
     if not os.path.exists(os.path.join(out_dir_mid,'images')):
