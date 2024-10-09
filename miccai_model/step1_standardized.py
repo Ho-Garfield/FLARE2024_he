@@ -4,8 +4,8 @@ import SimpleITK as sitk
 # import numpy as np
 from acvl_utils.miscellaneous.ptqdm import ptqdm
 
-input_dir = "data/PublicValidation/labels"
-output_dir = "data/PublicValidation/labels_std"
+input_dir = "data/origin_labels"
+output_dir = "data/labels"
 in_sub = ".nii.gz"
 out_sub = ".nii.gz"
 is_label = True
