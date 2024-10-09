@@ -163,10 +163,10 @@ def mask2image(rough_label_path, mask_mris_dir, out_dir):
             shutil.copy(rough_label_path,mri_mask_path)
 
 
-mris_dir = "/DATA_16T/MICCAI/MRI-pre2all/mris"
-mask_dir = "/DATA_16T/MICCAI/MRI-pre2all/PRED"
+mris_dir = "./MRI-pre2all/mris"
+mask_dir = "./MRI-pre2all/pred"
 
-match_dir = "/DATA_16T/MICCAI/match_only"
+match_dir = "./match"
 final_label_dir = os.path.join(match_dir,"labels")
 
 if __name__ == "__main__":
