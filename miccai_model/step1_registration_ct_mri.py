@@ -9,15 +9,15 @@ tmp_dir = r"./temp1"
 img_sub = "_0000.nii.gz"
 lab_sub = ".nii.gz"
 
-a0_path ="./CT_select/FLARE22_Tr_0001_0000.nii.gz"
-a0_label_path ="./labels/FLARE22_Tr_0001.nii.gz"
+a0_path ="./CT_select/images/FLARE22_Tr_0001_0000.nii.gz"
+a0_label_path ="./CT_select/labels/FLARE22_Tr_0001.nii.gz"
 b0_path = "./T1W/MR745_6_C-pre_0000.nii.gz"
 
 out_dir_mid = ""
-out_dir_final = ""
+out_dir_final = "miccai_model/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train"
 
-input_images_dir="./CT_select"
-input_labels_dir ="./labels"
+input_images_dir="./CT_select/images"
+input_labels_dir ="./CT_select/labels"
 input_targets_dir="./T1W"
 
 
@@ -56,8 +56,8 @@ def registration_a2b(a_path,b_path,i, label_dir, out_dir):
     
     
     a_directory = os.path.join(str(out_dir), 'images', str(i) + '.nii')
-    a_label_directory = os.path.join(str(out_dir), 'labels',str(i) + '.nii')
-    b__directory = os.path.join(str(out_dir), 'targets', str(i) + '.nii')
+    a_label_directory = os.path.join(str(out_dir), 'image_labels',str(i) + '.nii')
+    b__directory = os.path.join(str(out_dir), 'labels', str(i) + '.nii')
     ants.image_write(a, a_directory)
     ants.image_write(a_label, a_label_directory)
     ants.image_write(b, b__directory)
@@ -171,8 +171,8 @@ if __name__ == "__main__":
         )
     if not os.path.exists(os.path.join(out_dir_final,'images')):
         os.makedirs(os.path.join(out_dir_final,'images'))
+        os.makedirs(os.path.join(out_dir_final,'image_labels'))
         os.makedirs(os.path.join(out_dir_final,'labels'))
-        os.makedirs(os.path.join(out_dir_final,'targets'))
 
     new_a_dir = os.path.join(out_dir_mid,"images")
     new_a_label_dir = os.path.join(out_dir_mid,"labels")
