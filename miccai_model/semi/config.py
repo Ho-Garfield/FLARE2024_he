@@ -10,11 +10,11 @@ test_img_path = r"semi/test/origin_img.nii.gz"
 test_label_path = r"semi/test/origin_label.nii.gz"
 parser = argparse.ArgumentParser()
 parser.add_argument('--root_path', type=str,
-                    default='../data/semi', help='pesudo_root_path')
+                    default='../data', help='pesudo_root_path')
 
 
 parser.add_argument('--valid_path', type=str,
-                    default='../data/semi', help='valid_path (pesudo)')
+                    default='../data', help='valid_path (pesudo)')
 
 parser.add_argument('--exp', type=str,
                     default='Mean_Teacher', help='experiment_name')
