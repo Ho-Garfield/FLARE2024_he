@@ -159,7 +159,7 @@ def registration_wi2a(mri_a_path,mri_wi_path, out_dir):
 in_dir ="/DATA_16T/MICCAI/Flip_resample"
 out_dir = "/DATA_16T/MICCAI/Flip_resample_registartion_dwi"
 
-a_dir = "/DATA_16T/MICCAI/sure/Flip_resample_registartion_a"
+a_dir = "/DATA_16T/MICCAI/Flip_resample_registartion_a"
 
 if __name__ == "__main__":
     if not os.path.exists(os.path.join(out_dir,"mask")):
