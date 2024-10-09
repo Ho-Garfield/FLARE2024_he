@@ -3,8 +3,8 @@ import SimpleITK as sitk
 import os
 from acvl_utils.miscellaneous.ptqdm import ptqdm
 
-input_dir = "/media/wl/Extreme SSD/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/fake_mri"
-out_dir ="/media/wl/Extreme SSD/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/fake_mri_gz"
+input_dir = ""
+out_dir =""
 def CTNormalization(image_path,min,max,out_dir):
     image = sitk.ReadImage(image_path)
     intensityWindowingFilter = sitk.IntensityWindowingImageFilter()
@@ -45,5 +45,6 @@ def nii_nii_gz_switch(f_path,out_dir):
 if __name__ == "__main__":
     os.makedirs(out_dir,exist_ok=True)
     img_paths = [os.path.join(input_dir, f) for f in os.listdir(input_dir) if f.endswith(".nii") ]
-    # ptqdm(function = nii_nii_gz_switch, iterable = img_paths, processes = 8,out_dir=out_dir)
     ptqdm(function = CTNormalization, iterable = img_paths, processes = 4, min = -160, max=240,out_dir=out_dir)
+    #ptqdm(function = MRINormalization, iterable = img_paths, processes = 4, out_dir=out_dir)
+
