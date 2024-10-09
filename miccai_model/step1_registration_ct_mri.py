@@ -9,16 +9,16 @@ tmp_dir = r"./temp1"
 img_sub = "_0000.nii.gz"
 lab_sub = ".nii.gz"
 
-a0_path ="./images_255_select/FLARE22_Tr_0001_0000.nii.gz"
+a0_path ="./CT_select/FLARE22_Tr_0001_0000.nii.gz"
 a0_label_path ="./labels/FLARE22_Tr_0001.nii.gz"
-b0_path = "./Flip_resample/MR745_6_C-pre_0000.nii.gz"
+b0_path = "./T1W/MR745_6_C-pre_0000.nii.gz"
 
 out_dir_mid = ""
 out_dir_final = ""
 
-input_images_dir="./images_255_select"
+input_images_dir="./CT_select"
 input_labels_dir ="./labels"
-input_targets_dir="./Flip_resample"
+input_targets_dir="./T1W"
 
 
 
