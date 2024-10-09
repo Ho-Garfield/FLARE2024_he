@@ -156,16 +156,14 @@ def registration_wi2a(mri_a_path,mri_wi_path, out_dir):
 
 
 
-in_dir ="/DATA_16T/MICCAI/Flip_resample"
-out_dir = "/DATA_16T/MICCAI/Flip_resample_registartion_dwi"
+in_dir ="./Flip_resample"
+out_dir = "./Flip_resample_registartion_dwi"
 
 a_dir = "/DATA_16T/MICCAI/Flip_resample_registartion_a"
 
 if __name__ == "__main__":
     if not os.path.exists(os.path.join(out_dir,"mask")):
         os.makedirs(os.path.join(out_dir,"mask"))
-    body_registration_phase("/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_C-pre_0000.nii.gz","/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_InPhase_0000.nii.gz",
-                            "/DATA_16T/MICCAI/MRI-pre2all/mris/MR11656_6_InPhase_0000.nii.gz","") 
     mri_pre_paths = [os.path.join(in_dir,f) for f in os.listdir(in_dir) if f.endswith(subs['pre']) ]
     mri_v_paths = [str.replace(f,subs["pre"],subs["v"]) for f in mri_pre_paths]
     mri_a_paths = [str.replace(f,subs["pre"],subs["a"]) for f in mri_pre_paths]
