@@ -89,7 +89,7 @@ T1W/
 └── 498_pre_0000.nii.gz
 
 ```
-Modify the parameters and code in ```miccai_model/step1_registration_ct_mri.py```:
+Modify the parameters in ```miccai_model/step1_registration_ct_mri.py```:
 ```
 img_sub = "_0000.nii.gz"
 lab_sub = ".nii.gz"
@@ -132,7 +132,15 @@ This will generate a directory in the miccai_model/3D-CycleGan-Pytorch-MedImagin
 ### 1. 3D CycleGAN
 In this project, the implementation of the 3D CycleGAN is based on the repository available at https://github.com/davidiommi/3D-CycleGan-Pytorch-MedImaging. The training and inference workflows can be referenced from the link above.
 ### 2. Train Semi-supervised model
-Use the trained 3D CycleGAN to generate T1W data corresponding to the CT data in ```miccai_model/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/images```. Place these files along with the files from the ```T1W/``` directory into ```miccai_model/data/images```. At the same time, place the files from ```miccai_model/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/images_label``` into ```miccai_model/data/labels```. The structure of the data directory is as follows:
+Create the ```miccai_model/data/``` folder. 
+
+Use the trained 3D CycleGAN to generate T1W data corresponding to the CT data in ```miccai_model/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/images```. 
+
+Place these files along with the files from the ```T1W/``` directory into ```miccai_model/data/images```(. 
+
+At the same time, place the files from ```miccai_model/3D-CycleGan-Pytorch-MedImaging-main/Data_folder/train/images_label``` into ```miccai_model/data/labels```. 
+
+The structure of the data directory is as follows:
 ```
 ├── data                   
 |   ├── images                          
@@ -148,7 +156,7 @@ Use the trained 3D CycleGAN to generate T1W data corresponding to the CT data in
 |   |   ├── 0.nii             
 |   |   ├── 1.nii
 |   |   └── ...
-Modify the parameters and code in ```miccai_model/semi/config.py```:
+Modify the parameters in ```miccai_model/semi/config.py```:
 
 ```
 Run train.py
