@@ -36,6 +36,9 @@ You can see that the window contains preprocessing, stage1, stage2, and stage3, 
 
 ## Prepare the data
 Create the ```miccai_model/FLARE24``` , and place the data in the following format.
+Note that the suffix of the LLD dataset should meet one of the following formats:
+`["_T2WI_0000.nii.gz","_OutPhase_0000.nii.gz","_DWI_0000.nii.gz","_C--V_0000.nii.gz",
+       "_C-pre_0000.nii.gz","_C--Delay_0000.nii.gz","_C--A_0000.nii.gz","_InPhase_0000.nii.gz"]`
 ```
 FLARE24/
 ├── CT/
