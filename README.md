@@ -63,6 +63,9 @@ Click preprocess to enter the preprocessing window.
 
 
 ### 1. Resampling. 
+Click the standard.py button, modify the parameters, and then click the Run button.
+
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/4.jpg)](flow)
 
 
 ### 2. Patient position readjustment.
