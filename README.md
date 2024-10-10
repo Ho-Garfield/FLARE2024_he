@@ -106,6 +106,11 @@ Click Stage3 to enter the Stage3 window.
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s3.jpg)](flow)
 
 ## Inference
+Click Stage3 to enter the Stage3 window.
+
+Click the `predict.py` button, modify the parameters, and then click the `Run` button.
+
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/inference.jpg)](flow)
 
 ## Evaluation
 
