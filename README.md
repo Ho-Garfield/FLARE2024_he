@@ -63,18 +63,18 @@ Click preprocess to enter the preprocessing window.
 
 
 ### 1. Resampling. 
-Click the standard.py button, modify the parameters, and then click the Run button.
+Click the `standard.py` button, modify the parameters, and then click the `Run` button.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/4.jpg)](flow)
 
 
 ### 2. Patient position readjustment.
-   
-
-
+Click the `filip_mri_with_inphase.py` button, modify the parameters, and then click the `Run` button.
 ### 3. Adjust grayscale range.
+Click the `gray2255.py` button, modify the parameters, and then click the `Run` button.
 
 ### 4. Translation registration.(CT<->MRI T1W）
+Click the `registration_ct_mri.py` button, modify the parameters, and then click the `Run` button.
 
 ## Stage 1
 ### 1. 3D CycleGAN
