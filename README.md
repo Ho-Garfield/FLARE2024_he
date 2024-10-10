@@ -76,7 +76,7 @@ Click the standard.py button, modify the parameters, and then click the Run butt
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/4.jpg)](flow)
 
 ### 2. Patient position readjustment.
-Click the `filip_mri_with_inphase.py` button, modify the parameters, and then click the `Run` button.
+Click the `flip_mri_with_inphase.py` button, modify the parameters, and then click the `Run` button.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/5.jpg)](flow)
 
