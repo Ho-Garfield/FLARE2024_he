@@ -17,7 +17,7 @@ PARAMS = {
         "is_label": {"default": 'False', "type": str},
         "num_process": {"default": 8, "type": int}
     },
-    "./filip_mri_with_inphase.py": {
+    "./flip_mri_with_inphase.py": {
         "inphase_dir": {"default": './STD/MRI/LLD', "type": str},
         "handle_dir": {"default": './STD/MRI/LLD', "type": str},
         "out_dir": {"default": './STD/MRI/LLD', "type": str},
@@ -94,7 +94,7 @@ PARAMS = {
 
 # Map stages to scripts
 STAGES = {
-    "Preprocess":["./standardized.py", "./filip_mri_with_inphase.py","./gray2255.py","./registration_ct_mri.py"],
+    "Preprocess":["./standardized.py", "./flip_mri_with_inphase.py","./gray2255.py","./registration_ct_mri.py"],
     "Stage 1": ["3D-CycleGan-Pytorch-MedImaging-main/gan_train.py", "3D-CycleGan-Pytorch-MedImaging-main/gan_pred.py",
                 "semi/train.py","semi/predict.py"],
     "Stage 2": ["./registration_self.py", "LLD_label_share_kidney_match.py","select_CT.py",
