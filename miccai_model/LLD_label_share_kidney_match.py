@@ -169,10 +169,10 @@ if __name__ =="__main__":
 
     import argparse
     parser = argparse.ArgumentParser(description="Process some parameters.")
-    parser.add_argument('--mris_dir', type=str, default='data/satge2/images')
-    parser.add_argument('--mask_dir', type=str, default='./data/satge1_pred_t1w') 
-    parser.add_argument('--temp_dir', type=str, default='./data/satge2_temp')
-    parser.add_argument('--final_label_dir', type=str, default='data/satge2/labels')
+    parser.add_argument('--mris_dir', type=str, default='data/stage2/images')
+    parser.add_argument('--mask_dir', type=str, default='./data/stage1_pred_t1w') 
+    parser.add_argument('--temp_dir', type=str, default='./data/stage2_temp')
+    parser.add_argument('--final_label_dir', type=str, default='data/stage2/labels')
     parser.add_argument('--num_process', type=int, default=8)
     args = parser.parse_args()
     mris_dir = args.mris_dir
