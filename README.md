@@ -31,6 +31,7 @@ https://www.codabench.org/competitions/2296/
 python window.py
 ```
 You can see that the window contains preprocessing, stage1, stage2, and stage3, as shown in the figure below.
+
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/2.png)](flow)
 
 ## Prepare the data
@@ -57,6 +58,7 @@ FLARE24/
 ## Preprocessing
 
 Click preprocess to enter the preprocessing window.
+
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/3.jpg)](flow)
 
 
