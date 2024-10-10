@@ -6,7 +6,7 @@
 
 - Ubuntu 22.04.2 LTS
 - Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz, 8 × 32GB; 2400MT/s, NVIDIA GeForce RTX 4090 24G
-- 11.8
+- cuda 11.8
 - Python 3.9.0
   
 
