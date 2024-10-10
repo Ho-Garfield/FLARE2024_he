@@ -67,7 +67,7 @@ FLARE24/
 
 Click preprocess to enter the preprocessing window.
 
-[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/3.jpg)](flow)
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/2.jpg)](flow)
 
 
 ### 1. Resampling. 
