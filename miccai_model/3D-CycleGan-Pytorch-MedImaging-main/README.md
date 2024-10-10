@@ -82,9 +82,6 @@ by loading them and setting the correspondent epoch.
 Launch "test.py" to test the network. Modify the parameters in the test_options parse section to select the path of image to infer and result. First you have to rename the weights "latest_net_GA" in:
 "latest_net_G" to go from images (T1) to labels (T2). Do the same with latest_net_GB to go in the opposite direction.
 
-Sample images: on the left side the T1, in the middle the T2_fake and the right side the T2 (epoch 100)
-
-![Image](images/all.JPG)
 
 *******************************************************************************
 ### Tips:

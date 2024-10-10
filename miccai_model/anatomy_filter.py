@@ -133,18 +133,22 @@ def postprocess(rough_label):
 
 
 
-mask_dir = "data/MRI_S3_NEW/out"
-select_dir ="data/MRI_S3_NEW/select"
 
-if __name__ == "__main__":
+if __name__ =="__main__":
 
-    if not os.path.exists(select_dir):
-        os.makedirs(select_dir)
+    import argparse
+    parser = argparse.ArgumentParser(description="Process some parameters.")
+    parser.add_argument('--stage2_pred', type=str, default='./data/stage2_pred')
+    parser.add_argument('--stage3_label_dir', type=str, default='./data/stage3/labels')    
+    parser.add_argument('--num_process', type=int, default=8)
+    # 继续添加其他参数...
+    args = parser.parse_args()
+
+
+    if not os.path.exists(args.stage3_label_dir):
+        os.makedirs(args.stage3_label_dir)
     
-    mask_paths = [os.path.join(mask_dir, f) for f in os.listdir(mask_dir) if f.endswith(".nii.gz") ]
-    ptqdm(function = anatomy_filter, iterable = mask_paths, processes = 8, 
-          select_dir=select_dir)
-    
-    # ptqdm(function = check_size, iterable = label_paths, processes = 8,
-    #    out_dir="/DATA_16T/MICCAI/step3_new_p/body"
-    # )    
+    mask_paths = [os.path.join(args.stage2_pred, f) for f in os.listdir(args.stage2_pred) if f.endswith(".nii.gz") ]
+    ptqdm(function = anatomy_filter, iterable = mask_paths, processes = args.num_process, 
+          select_dir=args.stage3_label_dir)
+        

@@ -465,7 +465,7 @@ def semi_supervised_train(args, snapshot_path):
                         SampleRandomCrop(args.patch_size,current_label_batch=cb_valid),                             
                         SampleToTensor()])
 
-    db_valid = mydataset(root_dir=args.valid_path,
+    db_valid = mydataset(root_dir=args.root_path,
                         select_label_files = data['validation'],
                         transform=label_train_valid,is_semi=False)
     
@@ -645,7 +645,7 @@ def semi_supervised_train(args, snapshot_path):
 
 
 if __name__ == "__main__":
-
+    args = parser.parse_args()
     torch.cuda.empty_cache()
 
     if not args.deterministic:
@@ -660,13 +660,13 @@ if __name__ == "__main__":
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed(args.seed)
 
-    snapshot_path = "../model/{}_f{}/{}".format(
+    snapshot_path = "./model/{}_f{}/{}".format(
         args.exp, args.cur_fold ,args.model)
     if not os.path.exists(snapshot_path):
         os.makedirs(snapshot_path)
     if os.path.exists(snapshot_path + '/semi'):
         shutil.rmtree(snapshot_path + '/semi')
-    shutil.copytree('.', snapshot_path + '/semi',
+    shutil.copytree('./semi', snapshot_path + '/semi',
                     shutil.ignore_patterns(['.git', '__pycache__']))
 
     logging.basicConfig(filename=snapshot_path+"/log.txt", level=logging.INFO,

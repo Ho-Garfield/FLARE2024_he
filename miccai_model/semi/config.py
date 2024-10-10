@@ -1,20 +1,12 @@
 import argparse
 
-
-
-# patch_size = [96, 160, 192]
-max_angle = 90
-batch_size = 4
-num_worker = 4
-test_img_path = r"semi/test/origin_img.nii.gz"
-test_label_path = r"semi/test/origin_label.nii.gz"
 parser = argparse.ArgumentParser()
 parser.add_argument('--root_path', type=str,
-                    default='../data', help='pesudo_root_path')
+                    default='./data', help='pesudo_root_path')
 
 
 parser.add_argument('--valid_path', type=str,
-                    default='../data', help='valid_path (pesudo)')
+                    default='data', help='valid_path (pesudo)')
 
 parser.add_argument('--exp', type=str,
                     default='Mean_Teacher', help='experiment_name')
@@ -42,7 +34,7 @@ parser.add_argument('--deterministic', type=int,  default=1,
 
 # parser.add_argument('--patch_size', type=list,  default=[96, 224, 224],
 #                     help='patch size of network input')
-parser.add_argument('--patch_size', type=list,  default=[48, 160, 224],#[80,160,192],
+parser.add_argument('--patch_size', type=list,  default=[48, 160, 224],
                     help='patch size of network input')
 parser.add_argument('--seed', type=int,  default=42, help='random seed')
 
@@ -73,5 +65,4 @@ parser.add_argument('--show_image_per_iterations', type=int,
                     default=20, help='default: show image per 20 iterations')
 parser.add_argument('--save_model_per_iterations', type=int,
                     default=10000, help='default: save model per 10000 iterations')
-args = parser.parse_args()
 

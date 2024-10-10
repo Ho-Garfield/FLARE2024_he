@@ -8,9 +8,7 @@ from scipy.ndimage import gaussian_filter
 import scipy.ndimage as ndi
 from net import Net
 
-model_path = ""
-image_folder=""
-predict_folder= ""
+
 
 def z_score_normalization(image):
 
@@ -621,7 +619,8 @@ def max_region(_region,box=None,keep_second=False):
         max_region[labeled_image == s_label] = 1
     return max_region
 
-def main():
+def main(model_path,image_folder,predict_folder,in_sub):
+
     num_class =14
     model = Net(n_channels=1, n_classes=num_class,normalization="instancenorm")
     model = model.cuda()
@@ -636,7 +635,7 @@ def main():
     if(not os.path.exists(pred_folder)):
         os.makedirs(pred_folder)
     exist_pred_list = os.listdir(pred_folder)
-    files = [f for f in os.listdir(img_folder) if f.endswith('.nii.gz') and  str.replace(f,"_0000","") not in exist_pred_list]
+    files = [f for f in os.listdir(img_folder) if f.endswith(in_sub) and  str.replace(f,"_0000","") not in exist_pred_list]
     print(str(len(files))+" files left.")
     print(files)
     import time
@@ -650,5 +649,15 @@ def main():
 
     
 
-if __name__ == "__main__":
-    main()
+if __name__ =="__main__":
+
+    import argparse
+    parser = argparse.ArgumentParser(description="Process some parameters.")
+    parser.add_argument('--model_path', type=str, default='./model/Mean_Teacher_f1/semi_model/best_model.pth')
+    parser.add_argument('--image_folder', type=str, default='./STD/MRI/LLD')  
+    parser.add_argument('--predict_folder', type=str, default='./data/stage1_pred_t1w')    
+    parser.add_argument('--in_sub', type=str, default='_C-pre_0000.nii.gz')  
+
+
+    args = parser.parse_args()
+    main(args.model_path,args.image_folder,args.predict_folder,args.in_sub)
