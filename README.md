@@ -85,6 +85,10 @@ Click the `registration_ct_mri.py` button, modify the parameters, and then click
 
 
 ## Stage 1
+Click Stage1 to enter the Stage1 window.
+
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s1.jpg)](flow)
+
 ### 1. 3D CycleGAN
 In this project, the implementation of the 3D CycleGAN is based on the repository available at https://github.com/davidiommi/3D-CycleGan-Pytorch-MedImaging. The training and inference workflows can be referenced from the link above.
 ### 2. Train Semi-supervised model
