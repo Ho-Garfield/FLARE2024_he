@@ -126,7 +126,7 @@ https://github.com/JunMa11/FLARE/tree/main/FLARE24
 
 | Model name       |  DICE  |    NSD   |
 | ---------------- | :----: | :------: |
-|       ours       | 81.60% |  89.83   |
+|       ours       | 81.60% |  89.83%  |
 
 
 ## Contributing
