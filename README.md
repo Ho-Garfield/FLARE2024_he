@@ -29,7 +29,7 @@ pip install -e .
 
 https://www.codabench.org/competitions/2296/
 
-## Run window.py
+## :door: Interactive window
 ```setup
 python window.py
 ```
