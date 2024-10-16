@@ -133,10 +133,10 @@ Click the `predict.py` button, modify the parameters, and then click the `Run` b
 https://github.com/JunMa11/FLARE/tree/main/FLARE24
 ## :pushpin: Results
 
-| Model name       |  DICE  |    NSD   |
+| Dataset Name	   |  DICE  |    NSD   |
 | ---------------- | :----: | :------: |
-|       ours       | 81.60% |  89.83%  |
-
+|     Validation   | 81.60% |  89.83%  |
+|       Test       |   ?    |    ?     |
 
 ## Contributing
 
