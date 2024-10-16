@@ -1,4 +1,4 @@
-# :trophy: FLARE24 Task3 Solution
+# :triangular_flag_on_post: FLARE24 Task3 Solution
 
 # :mag_right: Overview
 Joint Unsupervised Domain Adaptation and Semi-Supervised Learning for Multi-Sequence MR Abdominal Organ Segmentation
