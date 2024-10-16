@@ -117,7 +117,7 @@ Click Stage2 to enter the Stage2 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s2.jpg)](flow)
 
-## :thre: Stage 3
+## :three: Stage 3
 Click Stage3 to enter the Stage3 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s3.jpg)](flow)
