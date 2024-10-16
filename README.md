@@ -99,8 +99,14 @@ Click Stage1 to enter the Stage1 window.
 
 ### 1. 3D CycleGAN
 In this project, the implementation of the 3D CycleGAN is based on the repository available at https://github.com/davidiommi/3D-CycleGan-Pytorch-MedImaging. The training and inference workflows can be referenced from the link above.
-### 2. Train Semi-supervised model
+### 2. Click the `gan_train.py` to train 3D CycleGAN
 
+### 3. Rename GAN model and click the `gan_pred.py` to create Fake T1W sequence.
+
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/rename.jpg)](flow)
+
+### 3. Click 'train.py' to train Semi-supervised model
+### 3. Click 'predict.py' for predicting T1W sequences in LLD.
 
 
 ## Stage 2
