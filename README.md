@@ -1,12 +1,11 @@
-# 🔥 FLARE24 Task3 Solution
+# :trophy: FLARE24 Task3 Solution
 
-
-
-# Joint Unsupervised Domain Adaptation and Semi-Supervised Learning for Multi-Sequence MR Abdominal Organ Segmentation
+# :mag_right: Overview
+Joint Unsupervised Domain Adaptation and Semi-Supervised Learning for Multi-Sequence MR Abdominal Organ Segmentation
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/1.png)](flow)
 
 
-## Environments and Requirements
+## :computer: Environments and Requirements
 
 - Ubuntu 22.04.2 LTS
 - Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz, 8 × 32GB; 2400MT/s, NVIDIA GeForce RTX 4090 24G
@@ -26,7 +25,7 @@ pip install -e .
 
 
 
-## Dataset
+# :hospital: Dataset
 
 https://www.codabench.org/competitions/2296/
 
@@ -38,7 +37,7 @@ You can see that the window contains preprocessing, stage1, stage2, and stage3, 
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/2.png)](flow)
 
-## Prepare the data
+## :file_folder: Prepare the data
 Create the ```miccai_model/FLARE24``` , and place the data in the following format.
 Note that the suffix of the LLD dataset should meet one of the following formats:
 ```
@@ -67,7 +66,7 @@ FLARE24/
 
 
 ```
-## Preprocessing
+## :scissors: Preprocessing
 
 Click preprocess to enter the preprocessing window.
 
@@ -123,7 +122,7 @@ Click Stage3 to enter the Stage3 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s3.jpg)](flow)
 
-## Inference
+## :wrench: Inference
 Click Stage3 to enter the Stage3 window.
 
 Click the `predict.py` button, modify the parameters, and then click the `Run` button.
@@ -132,7 +131,7 @@ Click the `predict.py` button, modify the parameters, and then click the `Run` b
 
 ## Evaluation
 https://github.com/JunMa11/FLARE/tree/main/FLARE24
-## Results
+## :pushpin: Results
 
 | Model name       |  DICE  |    NSD   |
 | ---------------- | :----: | :------: |
