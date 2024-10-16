@@ -95,7 +95,7 @@ Click the `registration_ct_mri.py` button, modify the parameters, and then click
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/7.jpg)](flow)
 
 
-## Stage 1
+## :one: Stage 1
 Click Stage1 to enter the Stage1 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s1.jpg)](flow)
@@ -112,12 +112,12 @@ In this project, the implementation of the 3D CycleGAN is based on the repositor
 ### 3. Click 'predict.py' for predicting T1W sequences in LLD.
 
 
-## Stage 2
+## :two: Stage 2
 Click Stage2 to enter the Stage2 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s2.jpg)](flow)
 
-## Stage 3
+## :thre: Stage 3
 Click Stage3 to enter the Stage3 window.
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/s3.jpg)](flow)
