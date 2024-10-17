@@ -277,7 +277,7 @@ class Sample_Normalize:
                 sample[key] = self.min_max_normalization(sample[key])
             else :
                 raise Exception(f"normalize method error: not exist{self.method}")
-            return sample
+        return sample
         
         
     # Z-score normalization
