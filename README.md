@@ -140,9 +140,9 @@ https://github.com/JunMa11/FLARE/tree/main/FLARE24
 |     Validation   | 81.60% |  89.83%  |
 |       Test       |   ?    |    ?     |
 
-Our method exhibits both excellent and stable performance in DSC and NSD.
+Our method exhibits both excellent and stable performance in DSC and NSD, although it is slightly less efficient in terms of time and resource consumption.
+
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/result.png)](flow)
-Our method is slightly less efficient in terms of time and resource consumption.
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/cost.png)](flow)
 
 ## Contributing
