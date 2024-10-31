@@ -1,5 +1,7 @@
 # :triangular_flag_on_post: FLARE24 Task3 Solution
+Our solution, 'he,' ranks first in both DSC and NSD in the final tests.
 
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/rank.png)](flow)
 # :mag_right: Overview
 Joint Unsupervised Domain Adaptation and Semi-Supervised Learning for Multi-Sequence MR Abdominal Organ Segmentation
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/1.png)](flow)
