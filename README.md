@@ -140,7 +140,7 @@ https://github.com/JunMa11/FLARE/tree/main/FLARE24
 |     Validation   | 81.60% |  89.83%  |
 |       Test       |   ?    |    ?     |
 
-This solution, 'he,' ranks first in both DSC and NSD in the final tests.
+Our method exhibits both excellent and stable performance in DSC and NSD.
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/result.png)](flow)
 
 
