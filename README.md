@@ -141,7 +141,7 @@ https://github.com/JunMa11/FLARE/tree/main/FLARE24
 |       Test       |   ?    |    ?     |
 
 Our method exhibits both excellent and stable performance in DSC and NSD.
-[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/result.png)](flow)
+[![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/result2.png)](flow)
 
 
 ## Contributing
