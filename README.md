@@ -131,7 +131,7 @@ Click the `predict.py` button, modify the parameters, and then click the `Run` b
 
 [![flow](https://github.com/Ho-Garfield/-FLARE2024_solution_he/blob/main/inference.jpg)](flow)
 
-model download link: https://drive.google.com/file/d/10oppkUMdTFLdRi4KnoBvjpzLILPDG9N2/view?usp=drive_link
+[Model download link](https://drive.google.com/file/d/10oppkUMdTFLdRi4KnoBvjpzLILPDG9N2/view?usp=drive_link)
 ## Evaluation
 https://github.com/JunMa11/FLARE/tree/main/FLARE24
 ## :pushpin: Results
