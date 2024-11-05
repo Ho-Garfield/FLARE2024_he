@@ -16,7 +16,17 @@ def z_score_normalization(image):
     _std = np.std(image)
     z_score_normalized_image = (image - _mean) / (max(_std, 1e-8))
     return z_score_normalized_image
+def min_max_normalization(image, max_val=None,min_val=None):
+    if max_val is None:
+        max_val = image.max()
+    if min_val is  None:
+        min_val = 0
 
+    image[image< min_val] = min_val
+    image[image> max_val] = max_val
+    min_max_normalized_image = (1 * (image - min_val) / (max_val - min_val)) + 0
+
+    return min_max_normalized_image
 
 
 def compute_gaussian(tile_size: Tuple[int, ...], sigma_scale: float = 1. / 8, dtype=np.float16) \
@@ -24,7 +34,8 @@ def compute_gaussian(tile_size: Tuple[int, ...], sigma_scale: float = 1. / 8, dt
     tmp = np.zeros(tile_size)
     center_coords = [i // 2 for i in tile_size]
     sigmas = [i * sigma_scale for i in tile_size]
-    tmp[tuple(center_coords)] = 1 # 将中心位置设置为 1，以便在后续生成高斯核时保证高斯峰位于中心。
+    tmp[tuple(center_coords)] = 1 
+    # 将中心位置设置为 1，以便在后续生成高斯核时保证高斯峰位于中心。
     # tmp 是中心为 1 的数组，sigmas 是每个维度的标准差，mode 参数设置为 'constant' 表示在边界外填充常数值，cval 为填充的常数值。
     gaussian_importance_map = gaussian_filter(tmp, sigmas, 0, mode='constant', cval=0)
     gaussian_importance_map = gaussian_importance_map / np.max(gaussian_importance_map) * 1
@@ -44,11 +55,17 @@ def compute_steps_for_sliding_window(image_size: Tuple[int, ...], tile_size: Tup
     )
     """
     assert [i >= j for i, j in zip(image_size, tile_size)], "image size must be as large or larger than patch_size"
-    assert 0 < tile_step_size <= 1, 'step_size must be larger than 0 and smaller or equal to 1'
+    if isinstance(tile_step_size,list):
+        for t in tile_step_size:
+            assert 0 < t <= 1, 'step_size must be larger than 0 and smaller or equal to 1'
+    else:
+        assert 0 < tile_step_size <= 1, 'step_size must be larger than 0 and smaller or equal to 1'
+        t = [tile_step_size]*3
+        tile_step_size = t
 
     # our step width is patch_size*step_size at most, but can be narrower. For example if we have image size of
     # 110, patch size of 64 and step_size of 0.5, then we want to make 3 steps starting at coordinate 0, 23, 46
-    target_step_sizes_in_voxels = [i * tile_step_size for i in tile_size]
+    target_step_sizes_in_voxels = [i * t for i,t in zip(tile_size,tile_step_size)]
 
     num_steps = [int(np.ceil((i - k) / j)) + 1 for i, j, k in zip(image_size, target_step_sizes_in_voxels, tile_size)]
 
@@ -194,6 +211,13 @@ def get_sliding_window_generator(image_size: Tuple[int, ...], tile_size: Tuple[i
                     yield slicer
     else:
         steps = compute_steps_for_sliding_window(image_size, tile_size, tile_step_size)
+        if np.prod([len(i) for i in steps])>20:
+            tile_step_size = [1,1,0.5]
+            steps = compute_steps_for_sliding_window(image_size, tile_size, tile_step_size)
+        # if np.prod([len(i) for i in steps])>20:
+        #     tile_step_size = [1,1,1]
+        #     steps = compute_steps_for_sliding_window(image_size, tile_size, tile_step_size)
+
         if verbose: print(f'n_steps {np.prod([len(i) for i in steps])}, image size is {image_size}, tile_size {tile_size}, '
                           f'tile_step_size {tile_step_size}\nsteps:\n{steps}')
         for sx in steps[0]:
@@ -379,8 +403,8 @@ def predict( img_path,model, out_dir, img_suffix, out_suffix, num_class):
     resample_image_sitk = resample(image_sitk_lps,False,(1.2,1.2,3))
     resample_image = sitk.GetArrayFromImage(resample_image_sitk)
     z, y, x = resample_image.shape
-
-    resize_normalize_image = z_score_normalization(resample_image)
+    
+    resize_normalize_image = z_score_normalization(resample_image)#min_max_normalization(resample_image,240,-160)#
     input = torch.from_numpy(resize_normalize_image.reshape(
             1, resize_normalize_image.shape[0], resize_normalize_image.shape[1], resize_normalize_image.shape[2]).astype(np.float32)
         ).to('cuda')
@@ -418,70 +442,48 @@ LABELS= {
         "Duodenum": 12,
         "Left Kidney": 13
         }
+
 def post_process_all_body(label):
     liver = label ==LABELS['Liver']
-    liver = max_region(liver)
-    
-    label[(label==LABELS["Liver"])] = 0
-    label[liver==1] = LABELS["Liver"]
-
-    z_livers,_,_ = np.where(liver==1)
+    l = max_region(liver)
+    z_livers,_,_ = np.where(l==1)
     if len(z_livers)==0:
-        return  label    
+        return  label
     z_liver = np.mean(z_livers)
     _max = min(label.shape[0],np.max(z_livers)+8)
     _min = max(0,np.min(z_livers)-8)
     liver_box = np.zeros(label.shape)
     liver_box[_min:_max] = 1
-
-    stomach = max_region((label==LABELS["Stomach"]),liver_box)
-    label[(label==LABELS["Stomach"])] = 0
-    label[stomach==1] = LABELS["Stomach"]
-        
-    rs = max_region((label==LABELS["Right Spleen"]),liver_box)
-    label[(label==LABELS["Right Spleen"])] = 0
-    label[rs==1] = LABELS["Right Spleen"]
-
+    label[(label==LABELS["Liver"])*(liver_box==0)] = 0
+    label[(label==LABELS["Stomach"])*(liver_box==0)] = 0
     label[(label==LABELS["Gall Bladder"])*(liver_box==0)] = 0
+    label[(label==LABELS["Pancreas"])*(liver_box==0)] = 0
     label[(label==LABELS["Left Adrenal Gland"])*(liver_box==0)] = 0
     label[(label==LABELS["Right Adrenal Gland"])*(liver_box==0)] = 0
-    
-    
-    liver_box = np.zeros(label.shape)
-    liver_box[_min:_max] = 1
-    pancreas = max_region((label==LABELS["Pancreas"]),liver_box)
-    label[(label==LABELS["Pancreas"])] = 0
-    label[pancreas==1] = LABELS["Pancreas"]
-    d = max_region((label==LABELS["Duodenum"]),liver_box,keep_second=True)
-    label[(label==LABELS["Duodenum"])] = 0
-    label[(d==1)] = LABELS["Duodenum"]
 
-    lk = max_region((label==LABELS["Left Kidney"]))
-    label[(label==LABELS["Left Kidney"])] = 0
-    label[lk==1] = LABELS["Left Kidney"]
 
-    rk = max_region((label==LABELS["Right Kidney"]))
-    label[(label==LABELS["Right Kidney"])] = 0
-    label[rk==1] = LABELS["Right Kidney"]
 
 
     a = max_region(label==LABELS["Aorta"],liver_box)
     label[(label==LABELS["Aorta"])] = 0
     label[a==1] = LABELS["Aorta"]
 
-    z_a,_,_ = np.where(a==1)
-    if len(z_a)>0:
-        a_box = np.zeros(a.shape)
-        a_max = np.max(z_a)
-        a_min = np.min(z_a)
-        a_box[a_min:a_max] = 1
-        label[(label==LABELS["Inferior Vena Cava"])*(a_box==0)] = 0
+    lk = max_region((label==LABELS["Left Kidney"]))
+    label[(label==LABELS["Left Kidney"])] = 0
+    label[lk==1] = LABELS["Left Kidney"]
+    
+    rk = max_region((label==LABELS["Right Kidney"]))
+    label[(label==LABELS["Right Kidney"])] = 0
+    label[rk==1] = LABELS["Right Kidney"]
+
     z_lks,_,_ = np.where(lk==1)
     if len(z_lks)==0:
         return  label
     z_lk = np.mean(z_lks)
     if z_lk > z_liver:
+        z_max = np.max(z_lks)
         z_liver_min = np.min(z_livers)
+        z_min = max(z_liver_min-10,0)
         liver2kidney_box = np.zeros(label.shape)
         liver2kidney_box[z_liver_min:,:,:]=1
         label[(label==LABELS["Duodenum"])*(liver2kidney_box==0)] = 0
@@ -489,109 +491,18 @@ def post_process_all_body(label):
 
     else:
         z_liver_max = np.max(z_livers)
+        z_max = min(z_liver_max + 10,label.shape[0])
+        z_min = max(np.min(z_lks),0)
         liver2kidney_box = np.zeros(label.shape)
         liver2kidney_box[:z_liver_max,:,:]=1
         label[(label==LABELS["Duodenum"])*(liver2kidney_box==0)] = 0
         label[(label==LABELS["Pancreas"])*(liver2kidney_box==0)] = 0
+    spleen_box = np.zeros(label.shape)
+    spleen_box[z_min:z_max] = 1
+    label[(label==LABELS["Right Spleen"])*(spleen_box==0)] = 0
+    
 
     return label
-
-
-# def post_process_all_body(label):
-#     liver = label ==LABELS['Liver']
-#     l = max_region(liver)
-    
-#     label[(label==LABELS["Liver"])] = 0
-#     label[liver==1] = LABELS["Liver"]
-
-#     z_livers,_,_ = np.where(l==1)
-#     if len(z_livers)==0:
-#         return  label
-#     z_liver = np.mean(z_livers)
-#     _max = min(label.shape[0],np.max(z_livers))
-#     _min = max(0,np.min(z_livers)-8)
-#     liver_box = np.zeros(label.shape)
-#     liver_box[_min:_max] = 1
-
-
-#     # liver = max_region((label==LABELS["Liver"]),(liver_box==0))
-#     # label[(label==LABELS["Liver"])] = 0
-#     # label[liver==1] = LABELS["Liver"]
-    
-#     stomach = max_region((label==LABELS["Stomach"]),(liver_box==0))
-#     label[(label==LABELS["Stomach"])] = 0
-#     label[stomach==1] = LABELS["Stomach"]
-        
-#     pancreas = max_region((label==LABELS["Pancreas"]),(liver_box==0))
-#     label[(label==LABELS["Pancreas"])] = 0
-#     label[pancreas==1] = LABELS["Pancreas"]
-
-#     rs = max_region((label==LABELS["Right Spleen"]),(liver_box==0))
-#     label[(label==LABELS["Right Spleen"])] = 0
-#     label[rs==1] = LABELS["Right Spleen"]
-
-
-#     # label[(label==LABELS["Liver"])*(liver_box==0)] = 0
-#     # label[(label==LABELS["Stomach"])*(liver_box==0)] = 0
-#     label[(label==LABELS["Gall Bladder"])*(liver_box==0)] = 0
-#     # label[(label==LABELS["Pancreas"])*(liver_box==0)] = 0
-#     label[(label==LABELS["Left Adrenal Gland"])*(liver_box==0)] = 0
-#     label[(label==LABELS["Right Adrenal Gland"])*(liver_box==0)] = 0
-
-
-
-
-#     a = max_region(label==LABELS["Aorta"],liver_box)
-#     label[(label==LABELS["Aorta"])] = 0
-#     label[a==1] = LABELS["Aorta"]
-
-#     z_a,_,_ = np.where(a==1)
-#     if len(z_a)>0:
-#         a_box = np.zeros(a.shape)
-#         a_max = np.max(z_a)
-#         a_min = np.min(z_a)
-#         a_box[a_min:a_max] = 1
-#         label[(label==LABELS["Inferior Vena Cava"])*(a_box==0)] = 0
-
-#     d = max_region((label==LABELS["Duodenum"]),(liver_box==0),keep_second=True)
-#     label[(label==LABELS["Duodenum"])] = 0
-#     label[(d==1)] = LABELS["Duodenum"]
-
-
-#     lk = max_region((label==LABELS["Left Kidney"]),(liver_box==0))
-#     label[(label==LABELS["Left Kidney"])] = 0
-#     label[lk==1] = LABELS["Left Kidney"]
-
-#     rk = max_region((label==LABELS["Right Kidney"]),(liver_box==0))
-#     label[(label==LABELS["Right Kidney"])] = 0
-#     label[rk==1] = LABELS["Right Kidney"]
-
-#     z_lks,_,_ = np.where(lk==1)
-#     if len(z_lks)==0:
-#         return  label
-#     z_lk = np.mean(z_lks)
-#     if z_lk > z_liver:
-#         # z_max = np.max(z_lks)
-#         z_liver_min = np.min(z_livers)
-#         # z_min = max(z_liver_min-10,0)
-#         liver2kidney_box = np.zeros(label.shape)
-#         liver2kidney_box[z_liver_min:,:,:]=1
-#         label[(label==LABELS["Duodenum"])*(liver2kidney_box==0)] = 0
-
-#     else:
-#         z_liver_max = np.max(z_livers)
-#         # z_max = min(z_liver_max + 10,label.shape[0])
-#         # z_min = max(np.min(z_lks),0)
-#         liver2kidney_box = np.zeros(label.shape)
-#         liver2kidney_box[:z_liver_max,:,:]=1
-#         label[(label==LABELS["Duodenum"])*(liver2kidney_box==0)] = 0
-#     # spleen_box = np.zeros(label.shape)
-#     # spleen_box[z_min:z_max] = 1
-#     # label[(label==LABELS["Right Spleen"])*(spleen_box==0)] = 0
-    
-
-#     return label
-
 
 
     
