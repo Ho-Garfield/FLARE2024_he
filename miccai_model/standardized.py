@@ -46,7 +46,7 @@ if __name__ =="__main__":
     os.makedirs(args.output_dir, exist_ok=True)
 
 
-    img_paths = [os.path.join(args.input_dir, f) for f in os.listdir(args.input_dir) if f.endswith('.nii.gz') ]
+    img_paths = [os.path.join(args.input_dir, f) for f in os.listdir(args.input_dir) if f.endswith(args.in_sub) ]
     ptqdm(function = standardize, iterable = img_paths, processes = args.num_process, 
-          output_dir=args.output_dir, in_sub = args.in_sub, out_sub =args.in_sub ,is_label = args.is_label
+          output_dir=args.output_dir, in_sub = args.in_sub, out_sub =args.out_sub ,is_label = args.is_label
         )
