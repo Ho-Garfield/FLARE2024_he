@@ -152,6 +152,14 @@ Our method exhibits both excellent and stable performance in DSC and NSD, althou
 ## Acknowledgement
 We thank the contributors of public datasets.
 
-
+##Paper
+@incollection{he2024joint,
+  title={Joint Unsupervised Domain Adaptation and Semi-supervised Learning for Multi-sequence MR Abdominal Organ Segmentation},
+  author={He, Jiahui and Wu, Lei and Liu, Wenbin and Liu, Zaiyi and Fang, Gang},
+  booktitle={MICCAI Challenge on Fast and Low-Resource Semi-supervised Abdominal Organ Segmentation},
+  pages={132--152},
+  year={2024},
+  publisher={Springer}
+}
 
 
