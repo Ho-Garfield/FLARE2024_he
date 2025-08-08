@@ -152,7 +152,7 @@ Our method exhibits both excellent and stable performance in DSC and NSD, althou
 ## Acknowledgement
 We thank the contributors of public datasets.
 
-##Paper
+## Paper
 @incollection{he2024joint,
   title={Joint Unsupervised Domain Adaptation and Semi-supervised Learning for Multi-sequence MR Abdominal Organ Segmentation},
   author={He, Jiahui and Wu, Lei and Liu, Wenbin and Liu, Zaiyi and Fang, Gang},
