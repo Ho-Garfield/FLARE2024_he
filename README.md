@@ -139,7 +139,7 @@ https://github.com/JunMa11/FLARE/tree/main/FLARE24
 | Dataset Name	   |  DICE  |    NSD   |
 | ---------------- | :----: | :------: |
 |     Validation   | 81.60% |  89.83%  |
-|       Test       |   ?    |    ?     |
+|       Test       | 73.3%  |  77.3%   |
 
 Our method exhibits both excellent and stable performance in DSC and NSD, although it is slightly less efficient in terms of time and resource consumption.
 
